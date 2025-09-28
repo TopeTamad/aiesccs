@@ -1,0 +1,125 @@
+<?php session_start(); $currentPage = basename($_SERVER['PHP_SELF']); ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance System</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .glass-sidebar {
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #374151;
+            transition: background 0.2s, color 0.2s;
+            margin-bottom: 2px;
+        }
+        .sidebar-link.active, .sidebar-link:hover {
+            background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+            color: #fff !important;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+        }
+        .sidebar-link i {
+            font-size: 1.2em;
+        }
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #6366f1;
+            letter-spacing: 1px;
+        }
+        .sidebar-hamburger {
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .glass-sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                z-index: 50;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            .glass-sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-hamburger {
+                display: block;
+                position: fixed;
+                top: 18px;
+                left: 18px;
+                z-index: 60;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                padding: 8px 10px;
+                cursor: pointer;
+            }
+            .ml-64 {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 min-h-screen">
+<!-- Hamburger for mobile -->
+<div class="sidebar-hamburger" onclick="toggleSidebar()">
+    <i class="fa fa-bars text-indigo-700 text-2xl"></i>
+</div>
+<div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+<div id="sidebar" class="w-64 bg-white shadow-lg rounded-2xl flex flex-col py-6 px-4 fixed lg:inset-y-3 lg:left-3 z-20 lg:translate-x-0 transform transition-transform duration-300 ease-in-out lg:static lg:rounded-xl">
+    <!-- Logo -->
+    <div class="flex flex-col items-center mb-8 px-2">
+        <img src="assets/img/logo.png" alt="Logo" class="w-24 h-24 rounded-full object-cover shadow-md mb-3 bg-gray-100" onerror="this.style.display='none'">
+        <h2 class="text-lg font-bold text-gray-800"></h2>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 flex flex-col gap-1">
+        <a href="dashboard.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='dashboard.php') echo ' active'; ?>"><i class="fa-solid fa-chart-pie text-indigo-500"></i>Dashboard</a>
+        <a href="students.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='students.php') echo ' active'; ?>"><i class="fa-solid fa-user-graduate text-indigo-500"></i>Students</a>
+        <a href="add_teacher.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='add_teacher.php') echo ' active'; ?>"><i class="fa-solid fa-user-plus text-indigo-500"></i>Faculty</a>
+        <a href="attendance.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='attendance.php') echo ' active'; ?>"><i class="fa-solid fa-calendar-check text-indigo-500"></i>Attendance</a>
+        
+        <hr class="my-3 border-gray-300">
+
+        <a href="add_subject.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='add_subject.php') echo ' active'; ?>"><i class="fa-solid fa-book-medical text-indigo-500"></i>Add Subject</a>
+        <a href="manage_teachers.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='manage_teachers.php') echo ' active'; ?>"><i class="fa-solid fa-users-gear text-indigo-500"></i>Manage Faculty</a>
+        <a href="assign_subjects.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='assign_subjects.php') echo ' active'; ?>"><i class="fa-solid fa-book-open-reader text-indigo-500"></i>Assign Subjects</a>
+        <a href="manage_subjects.php" class="sidebar-link flex items-center gap-3 py-2 px-4 rounded-lg hover:bg-indigo-100 transition<?php if($currentPage==='manage_subjects.php') echo ' active'; ?>"><i class="fa-solid fa-book-open-reader text-indigo-500"></i>Manage Subjects</a>
+    </nav>
+
+    <!-- Logout -->
+    <form action="logout.php" method="post" class="mt-6">
+        <button type="submit" class="w-full flex items-center justify-center gap-2 py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition">
+            <i class="fa-solid fa-right-from-bracket"></i>Logout
+        </button>
+    </form>
+</div>
+
+    <div class="flex-1 ml-64">
+        <!-- Main content starts here -->
+
+</body>
+</html>
